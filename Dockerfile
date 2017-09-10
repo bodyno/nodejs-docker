@@ -1,4 +1,4 @@
-FROM daocloud.io/library/node:6.11.2-wheezy
+FROM node:boron
 
 RUN npm install yarn -g
 
