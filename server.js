@@ -12,9 +12,10 @@ const PORT = 8080
 // App
 const app = express()
 app.get('/', function (req, res) {
-  const counter = redis.incr('counter')
-  console.log(counter)
-  res.send(`Hello world ${os.hostname()}  redis: ${counter}`)
+  redis.incr('counter').then(counter => {
+    console.log(counter)
+    res.send(`Hello world ${os.hostname()}  redis: ${counter}`)
+  })
 })
 
 app.listen(PORT)
