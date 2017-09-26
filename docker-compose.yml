@@ -1,12 +1,12 @@
-version: '3'
+version: "3"
 services:
   web:
     build: .
     ports:
-    - "8080:8080"
-    links:
-    - redis
+      - "8080:8080"
+    depends_on:
+      - redis
   redis:
     image: redis
-volumes:
-  logvolume01: {}
+    ports:
+      - "6379:6379"
