@@ -8,8 +8,14 @@ services:
       - mq
     ports:
       - 8080
+    links:
+      - redis
+      - mysql
+      - mq
+    volumes:
+      - ./app:/app/app
   redis:
-    image: redis
+    image: redis:4.0
     ports:
       - 6379
   mysql:
