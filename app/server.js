@@ -3,25 +3,23 @@ const os = require('os')
 const Redis = require('ioredis')
 const mysql = require('mysql')
 const amqp = require('amqplib')
+const config = require('./config')
 
-amqp.connect('amqp://root:xuzeyu123@localhost').then((conn) => {
+amqp.connect(config.mq).then((conn) => {
   console.log('mq connected')
 }).catch(err => {
   console.log('mq failed')
 })
 
-const redis = new Redis({
-  host: 'localhost'
-})
+const redis = new Redis(config.redis)
 
-const connection = mysql.createConnection('mysql://root:xuzeyu123@localhost/nobody_db')
+const connection = mysql.createConnection(config.mysql)
 
 connection.connect((err) => {
   if (err) {
     console.error('error connecting: ' + err.stack)
     return
   }
-
   console.log('connected as id ' + connection.threadId)
 })
 
