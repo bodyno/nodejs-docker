@@ -4,18 +4,17 @@ const Redis = require('ioredis')
 const mysql = require('mysql')
 const amqp = require('amqplib')
 
-amqp.connect('amqp://mq').then((conn) => {
+amqp.connect('amqp://root:xuzeyu123@localhost').then((conn) => {
   console.log('mq connected')
 }).catch(err => {
   console.log('mq failed')
-  console.log(err)
 })
 
 const redis = new Redis({
-  host: 'redis'
+  host: 'localhost'
 })
 
-const connection = mysql.createConnection('mysql://root:xuzeyu123@mysql/nobody_db')
+const connection = mysql.createConnection('mysql://root:xuzeyu123@localhost/nobody_db')
 
 connection.connect((err) => {
   if (err) {
@@ -33,7 +32,6 @@ const PORT = 8080
 const app = express()
 app.get('/', function (req, res) {
   redis.incr('counter').then(counter => {
-    console.log(counter)
     res.send(`Hello world ${os.hostname()}  redis: ${counter}`)
   })
 })
