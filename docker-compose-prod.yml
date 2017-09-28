@@ -1,8 +1,0 @@
-version: '2'
-services:
-  web:
-    image: az8321550/nobody-nodejs
-    depends_on:
-      - redis
-  redis:
-    image: redis
